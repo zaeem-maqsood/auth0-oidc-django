@@ -1,0 +1,8 @@
+{% extends "admin/base_site.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <h1>Login</h1>
+  <p>You need to be logged in to view the admin.</p>
+  <a href="{% url 'oidc_authentication_init' %}">Login with OIDC</a>
+{% endblock %}
