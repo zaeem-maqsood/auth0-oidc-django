@@ -6,6 +6,14 @@ I wanted to connect with Auth0 using a more secure package than `authlib`. I cam
 `pip install -r requirements.txt`
 
 ## Step 2: Setup .env and settings file
+Create a .env file with:
+
+```
+AUTH0_CLIENT_ID=
+AUTH0_CLIENT_SECRET=
+AUTH0_DOMAIN=
+```
+
 I abstracted the user model (as you should with any Django project) and pointed the setting to it
 
 ```
@@ -24,3 +32,8 @@ REST_FRAMEWORK = {
     ],
 }
 ```
+
+Copy over the logic at the end of the setting.py file.
+
+## Step 4
+Override the login screen on the Django admin to ask users to login via Auth0 instead
