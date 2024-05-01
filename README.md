@@ -17,7 +17,8 @@ AUTH0_DOMAIN=
 I abstracted the user model (as you should with any Django project) and pointed the setting to it.
 Copy over the logic from `authO-oidc-django/backend.py` and amend it to your use case.
 
-Setup the flow in Auth0 actions:
+Add users to 'admin' role and set the flow in Auth0 actions:
+Create a new role for your users who are admins and add them to it.
 Make sure the namespace is the same as what you will use in `backend.py`
 ```
 exports.onExecutePostLogin = async (event, api) => {
