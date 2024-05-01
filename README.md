@@ -14,11 +14,24 @@ AUTH0_CLIENT_SECRET=
 AUTH0_DOMAIN=
 ```
 
-I abstracted the user model (as you should with any Django project) and pointed the setting to it
+I abstracted the user model (as you should with any Django project) and pointed the setting to it.
+Copy over the logic from `authO-oidc-django/backend.py` and amend it to your use case.
+
+Setup the flow in Auth0 actions:
+Make sure the namespace is the same as what you will use in `backend.py`
+```
+exports.onExecutePostLogin = async (event, api) => {
+  const namespace = 'iam.org.project.oidc-auth0-django-backend.roles.userRoles';
+  if (event.authorization) {
+    api.idToken.setCustomClaim(`${namespace}:userRoles`, event.authorization.roles);
+    api.accessToken.setCustomClaim(`${namespace}:userRoles`, event.authorization.roles);
+  }
+};
+```
 
 ```
 AUTH_USER_MODEL = "users.User"
-AUTHENTICATION_BACKENDS = ["oidcAuth0Django.backends.PermissionBackend"]
+AUTHENTICATION_BACKENDS = ["oidcAuth0Django.backend.PermissionBackend"]
 ```
 
 Add the packages and the new user model to installed_apps.
